@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/Charlie/Google Drive/COSC 2030/Lab8/BinaryTree.h
+RandomUtilities.h
+/Users/Charlie/Google Drive/COSC 2030/Lab8/RandomUtilities.h
+iostream
+-
+string
+-
+vector
+-
+queue
+-
+
+/Users/Charlie/Google Drive/COSC 2030/Lab8/BinaryTreeDriver.cpp
+BinaryTree.h
+/Users/Charlie/Google Drive/COSC 2030/Lab8/BinaryTree.h
+iostream
+-
+string
+-
+vector
+-
+
+/Users/Charlie/Google Drive/COSC 2030/Lab8/RandomUtilities.h
+cmath
+-
+ctime
+-
+algorithm
+-
+
