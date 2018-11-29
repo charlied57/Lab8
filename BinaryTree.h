@@ -106,6 +106,8 @@ public:
 
    std::vector< short > preorder() const;
 
+   std::vector< short > postorder() const;
+
 
 private:
    BinaryNode * tree_;
@@ -184,7 +186,12 @@ private:
    //   values in preorder.
    static void preorder( std::vector< short > & traversal, 
       const BinaryNode * subtree );
+
+   static void postorder( std::vector< short > & traversal,
+      const BinaryNode * subtree );
 };
+
+
 
 
 // Set the initial value of the static binary tree entry.
@@ -286,6 +293,14 @@ std::vector< short >
    return traversal;
 }
 
+std::vector< short >
+BinaryTree:: postorder() const
+{
+    std::vector< short > traversal;
+    postorder( traversal, tree_ );
+    return traversal;
+}
+
 
 // code for helper functions
 
@@ -369,28 +384,90 @@ void
 long 
    BinaryTree:: size( const BinaryNode * subtree )
 {
-   return  -1;
+    // Return 0 if the tree has no nodes
+    if(subtree == NULL){
+        return 0;
+    }
+
+    // Define size
+    long treeSize = 0;
+
+    // Hit every node
+    treeSize += size(subtree -> left_);
+    treeSize += size(subtree -> right_);
+
+    // Return size +1 for new node
+    return(treeSize + 1);
+
 }
 
 
 long 
    BinaryTree:: height( const BinaryNode * subtree )
 {
-   return  -2;
+    // Return 0 if the tree has no nodes
+    if(subtree == NULL){
+        return 0;
+    }
+
+    // Define height variables
+    long leftHeight = 0;
+    long rightHeight = 0;
+
+    // Find deepest part of each branch
+    leftHeight = height(subtree -> left_) + 1;
+    rightHeight = height(subtree -> right_) + 1;
+
+    // Returns the deeper branch
+    if(leftHeight > rightHeight){
+        return(leftHeight);
+    }
+    else{
+        return(rightHeight);
+    }
+
 }
 
 
 long 
    BinaryTree:: leaves( const BinaryNode * subtree )
 {
-   return  -3;
+    // Return 0 if the node doesnt exist
+    if(subtree == NULL){
+        return 0;
+    }
+
+    // return 1 if the leaf is a node
+    if(subtree -> left_ == NULL && subtree -> right_ == NULL){
+        return 1;
+    }
+
+    //
+    else{
+        long rLeaves = leaves(subtree -> right_);
+        long lLeaves = leaves(subtree -> left_);
+        long tLeaves = rLeaves + lLeaves;
+
+        return (tLeaves);
+    }
 }
 
 
 short 
    BinaryTree:: leftmost( const BinaryNode * subtree )
 {
-   return -4;
+    // Follows the left path as far as possible.
+    // Does not check right to see if it goes right then way left.
+
+
+    if(subtree == NULL){
+        return 0;
+    }
+    if(subtree -> left_ == NULL){ ;
+        return(subtree -> entry_);
+    }
+    return leftmost(subtree -> left_);
+
 }
 
 
@@ -404,6 +481,18 @@ void
       preorder( traversal, subtree->left_ );
       preorder( traversal, subtree->right_ );
    }
+}
+
+void
+    BinaryTree:: postorder( std::vector< short > & traversal,
+                       const BinaryNode * subtree )
+{
+    if( subtree != NULL )
+    {
+        postorder( traversal, subtree->left_ );
+        postorder( traversal, subtree->right_ );
+        traversal.push_back( subtree->entry_ );
+    }
 }
 
 #endif

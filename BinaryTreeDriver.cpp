@@ -20,6 +20,12 @@
 // tom bailey   0740  25 feb 2013
 
 
+
+
+// Charles Davis
+// COSC 2030
+// 11/28/18
+
 #include "BinaryTree.h"
 
 #include <iostream>
@@ -92,11 +98,22 @@ int
          cout << endl;
       }
 
+      else if( request == "postorder" )
+      {
+          vector< short > traversal = theTree.postorder();
+          cout << "postorder is ";
+          for( unsigned long i=0; i<traversal.size(); ++i )
+          {
+              cout << traversal.at(i) << "  ";
+          }
+          cout << endl;
+      }
+
       else
       {
          cout << "Known requests: build <size>, display, size, " 
             << "height, leaves," << endl;
-         cout << "                leftmost, preorder, quit" << endl;
+         cout << "                leftmost, preorder, postorder, quit" << endl;
       }
 
       getRequest( request );
